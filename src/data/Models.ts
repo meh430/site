@@ -22,7 +22,7 @@ export interface Project {
     projectName: string;
     description: string;
     projectLink: string;
-    technologies: string[];
+    technologies: string;
     features: string[];
     images: string[]
 }
