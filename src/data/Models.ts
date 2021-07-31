@@ -38,3 +38,7 @@ export interface Education extends ImageItem {
     details: string;
 }
  
+export interface Quote {
+    author: string;
+    quote: string;
+}
