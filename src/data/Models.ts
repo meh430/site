@@ -1,3 +1,6 @@
+import React from "react";
+import { DataRepo } from "./DataRepo";
+import { QuoteRepo } from "./QuoteRepo";
 
 export interface ImageItem {
     image: string;
@@ -41,4 +44,10 @@ export interface Education extends ImageItem {
 export interface Quote {
     author: string;
     quote: string;
+}
+
+export interface PropsItem {
+    dataRepo: DataRepo;
+    quoteRepo?: QuoteRepo;
+    children?: React.ReactNode;
 }

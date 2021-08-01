@@ -2,7 +2,7 @@ import { quoteEndpoint } from "./Data";
 import { Quote } from "./Models";
 import { QuoteRepo } from "./QuoteRepo";
 
-class QuoteRepoImpl implements QuoteRepo {
+export class QuoteRepoImpl implements QuoteRepo {
     async getQuote(): Promise<Quote> {
         const error: Quote = {
             author: "Not Found",

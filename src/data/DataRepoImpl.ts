@@ -2,7 +2,11 @@ import { DataRepo } from "./DataRepo"
 import { Profile, Project, Skill, Education } from "./Models";
 import { data } from "./Data"
 
-class DataRepoImpl implements DataRepo {
+export class DataRepoImpl implements DataRepo {
+
+    getHeading(): string {
+        return data.heading
+    }
 
     getProfile(): Profile {
         return {
@@ -46,7 +50,7 @@ class DataRepoImpl implements DataRepo {
         return data.education.map((education) => ({
             schoolName: education.title,
             period: education.period,
-            details: education.details,
+            details: education.brief,
             image: education.image
         }))
     }
