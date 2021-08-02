@@ -1,5 +1,5 @@
 import { DataRepo } from "./DataRepo"
-import { Profile, Project, Skill, Education } from "./Models";
+import { Profile, Project, IconText, Education } from "./Models";
 import { data } from "./Data"
 
 export class DataRepoImpl implements DataRepo {
@@ -35,9 +35,9 @@ export class DataRepoImpl implements DataRepo {
         }))
     }
 
-    getSkills(): Skill[] {
+    getSkills(): IconText[] {
         return data.skills.map((skill) => ({
-            skillName: skill.skill,
+            text: skill.skill,
             icon: {
                 image: skill.icon,
                 isExternal: this.isIconExternal(skill.color),
@@ -52,6 +52,17 @@ export class DataRepoImpl implements DataRepo {
             period: education.period,
             details: education.brief,
             image: education.image
+        }))
+    }
+
+    getSections(): IconText[] {
+        return data.sections.map((section) => ({
+            text: section.section,
+            icon: {
+                image: section.icon,
+                isExternal: false,
+                iconColor: section.color
+            }
         }))
     }
 

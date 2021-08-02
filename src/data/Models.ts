@@ -30,8 +30,8 @@ export interface Project {
     images: string[]
 }
 
-export interface Skill {
-    skillName: string;
+export interface IconText {
+    text: string;
     icon: Icon;
 }
 

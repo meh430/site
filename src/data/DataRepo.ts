@@ -1,9 +1,10 @@
-import { Education, Profile, Project, Skill } from "./Models";
+import { Education, IconText, Profile, Project } from "./Models";
 
 export interface DataRepo {
     getHeading(): string
     getProfile(): Profile
     getProjects(): Project[]
-    getSkills(): Skill[]
+    getSkills(): IconText[]
     getEducation(): Education[]
+    getSections(): IconText[]
 }
