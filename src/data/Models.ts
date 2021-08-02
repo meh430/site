@@ -3,51 +3,51 @@ import { DataRepo } from "./DataRepo";
 import { QuoteRepo } from "./QuoteRepo";
 
 export interface ImageItem {
-    image: string;
+  image: string;
 }
 
 export interface Icon extends ImageItem {
-    isExternal: Boolean;
-    iconColor?: string;
+  isExternal: Boolean;
+  iconColor?: string;
 }
-  
+
 export interface ImageLink {
-    url: string;
-    icon: Icon;
+  url: string;
+  icon: Icon;
 }
 
 export interface Profile extends ImageItem {
-    bio: string;
-    contactLinks: ImageLink[]
+  bio: string;
+  contactLinks: ImageLink[];
 }
 
 export interface Project {
-    projectName: string;
-    description: string;
-    projectLink: string;
-    technologies: string;
-    features: string[];
-    images: string[]
+  projectName: string;
+  description: string;
+  projectLink: string;
+  technologies: string;
+  features: string[];
+  images: string[];
 }
 
 export interface IconText {
-    text: string;
-    icon: Icon;
+  text: string;
+  icon: Icon;
 }
 
 export interface Education extends ImageItem {
-    schoolName: string;
-    period: string;
-    details: string;
+  schoolName: string;
+  period: string;
+  details: string;
 }
- 
+
 export interface Quote {
-    author: string;
-    quote: string;
+  author: string;
+  quote: string;
 }
 
 export interface PropsItem {
-    dataRepo: DataRepo;
-    quoteRepo?: QuoteRepo;
-    children?: React.ReactNode;
+  dataRepo: DataRepo;
+  quoteRepo?: QuoteRepo;
+  children?: React.ReactNode;
 }
