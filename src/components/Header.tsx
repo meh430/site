@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useEffect } from "react"
-import { PropsItem } from "./data/Models"
+import { PropsItem } from "../data/Models"
 
 export const Header = (props: PropsItem) => {
     const heading = props.dataRepo.getHeading()
@@ -26,7 +26,7 @@ export const Header = (props: PropsItem) => {
 
     return (
         <h1 style={{fontSize:"96px"}}>
-           { message }<span style={{visibility: cursor ? "visible" : "hidden"}}>|</span>
+           { message }<span style={{visibility: cursor ? "visible" : "hidden", fontWeight: "lighter"}}>|</span>
         </h1>
     )
 }

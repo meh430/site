@@ -1,18 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { Header } from './Header';
+import { Header } from './components/Header';
 import { DataRepoImpl } from './data/DataRepoImpl';
 import { DataRepo } from './data/DataRepo';
-import { Sections } from './Sections';
+import { Sections } from './components/Sections';
+import { ProfileCard } from './components/Profile';
+import { createTheme, ThemeProvider, useMediaQuery } from '@material-ui/core';
 
 function App() {
   const dataRepo: DataRepo = new DataRepoImpl()
+
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          type: prefersDarkMode ? 'dark' : 'light',
+        },
+      }),
+    [prefersDarkMode],
+  );
+
   return (
-    <div className="col" style={{alignItems: "center", minWidth: "100%", maxWidth: "100%"}}>
-      <Header dataRepo={dataRepo} />
-      <Sections dataRepo={dataRepo} />
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="col" style={{ alignItems: "center", minWidth: "100%", maxWidth: "100%", minHeight: "100vh", background: theme.palette.background.default }}>
+        <Header dataRepo={dataRepo} />
+        <Sections dataRepo={dataRepo} />
+        <ProfileCard dataRepo={dataRepo} />
+      </div>
+    </ThemeProvider>
   );
 }
 

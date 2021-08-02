@@ -20,3 +20,16 @@
     flex-direction: column;
     flex-wrap: wrap;
 }
+
+.social {
+  margin: 7px;
+  font-size: 40px;
+  cursor: pointer;
+  transition: all 0.2s ease 0s;
+}
+
+.social:hover {
+  margin: 0px;
+  font-size: 47px;
+  transition: all 0.2s ease 0s;
+}

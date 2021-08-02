@@ -1,11 +1,13 @@
-import { Button, Icon } from "@material-ui/core";
-import { IconText, PropsItem } from "./data/Models";
+import { Button, Icon, useTheme } from "@material-ui/core";
+import { IconText, PropsItem } from "../data/Models";
 
 export const Sections = (props: PropsItem) => {
     const sections = props.dataRepo.getSections()
 
+    const theme = useTheme()
+
     return (
-        <div className="row">
+        <div className="row" style={{position: "sticky", top: 0, background: theme.palette.background.default}}>
             {sections.map(section => <SectionItem text={section.text} icon={section.icon} />)}
         </div>
     )
