@@ -4,8 +4,9 @@ import { Header } from "./components/Header";
 import { DataRepoImpl } from "./data/DataRepoImpl";
 import { DataRepo } from "./data/DataRepo";
 import { Sections } from "./components/Sections";
-import { ProfileCard } from "./components/Profile";
+import { ProfileSection } from "./components/Profile";
 import { createTheme, ThemeProvider, useMediaQuery } from "@material-ui/core";
+import { EducationCard } from "./components/Education";
 
 const App = () => {
   const dataRepo: DataRepo = new DataRepoImpl();
@@ -36,7 +37,8 @@ const App = () => {
       >
         <Header dataRepo={dataRepo} />
         <Sections dataRepo={dataRepo} />
-        <ProfileCard dataRepo={dataRepo} />
+        <ProfileSection dataRepo={dataRepo} />
+        <EducationCard />
       </div>
     </ThemeProvider>
   );

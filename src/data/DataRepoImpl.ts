@@ -48,7 +48,7 @@ export class DataRepoImpl implements DataRepo {
     return data.education.map((education) => ({
       schoolName: education.title,
       period: education.period,
-      details: education.brief,
+      details: education.details,
       image: education.image,
     }));
   }

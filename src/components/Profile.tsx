@@ -1,14 +1,30 @@
-import { Card, useTheme } from "@material-ui/core";
+import { Card, Theme, useTheme } from "@material-ui/core";
 import { ImageLink, Profile, PropsItem } from "../data/Models";
 
-export const ProfileCard = (props: PropsItem) => {
+export const getCardStyle = (theme: Theme, shadow: number = 11) => {
+  return {
+    boxShadow: theme.shadows[shadow],
+    borderRadius: "20px"
+  }
+}
+
+export const ProfileSection = (props: PropsItem) => {
+  return (
+    <div className="col" style={{alignItems: "center"}} >
+      <h1>About</h1>
+      <ProfileCard {...props}/>
+    </div>
+  )
+}
+
+const ProfileCard = (props: PropsItem) => {
   const theme = useTheme()
 
   const profile = props.dataRepo.getProfile();
   return (
     <Card
       className="row"
-      style={{ borderRadius: "20px", margin: "20px", justifyContent: "center", boxShadow: theme.shadows[11] }}
+      style={{ margin: "20px", justifyContent: "center", ...getCardStyle(theme, 11) }}
     >
       <div
         className="row"

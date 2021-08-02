@@ -10,7 +10,8 @@ export const Sections = (props: PropsItem) => {
     <div
       className="row"
       style={{
-          justifyContent: "center",
+        width: "100vw",
+        justifyContent: "center",
         position: "sticky",
         top: 0,
         background: theme.palette.background.default,
