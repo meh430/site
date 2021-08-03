@@ -32,7 +32,7 @@ const ProfileCard = (props: PropsItem) => {
       >
         <img
           src={profile.image}
-          style={{ borderRadius: "20px", margin: "20px", height: "320px", width: "320px" }}
+          style={{ borderRadius: "20px", margin: "20px", maxHeight: "300px" }}
         />
         <ProfileInfo {...profile} />
       </div>
@@ -43,7 +43,7 @@ const ProfileCard = (props: PropsItem) => {
 const ProfileInfo = (profile: Profile) => {
   return (
     <div className="col" style={{ justifyContent: "center" }}>
-      <p style={{ maxWidth: "400px", margin: "20px", fontSize: "18px" }}>{profile.bio}</p>
+      <p style={{ maxWidth: "500px", margin: "20px", fontSize: "18px" }}>{profile.bio}</p>
       <div className="row" style={{ justifyContent: "center" }}>
         {profile.contactLinks.map((link) => (
           <SocialLink {...link} />

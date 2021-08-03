@@ -24,7 +24,7 @@ export const Header = (props: PropsItem) => {
   }, [heading]);
 
   return (
-    <h1 style={{ fontSize: "96px", margin: "20px" }}>
+    <h1 style={{ fontSize: "96px", marginTop: "50px", padding: "20px" }}>
       {message}
       <span
         style={{

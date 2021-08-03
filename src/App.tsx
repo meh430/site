@@ -30,7 +30,6 @@ const App = () => {
         style={{
           alignItems: "center",
           minWidth: "100vw",
-          maxWidth: "100vw",
           minHeight: "100vh",
           background: theme.palette.background.default,
         }}
