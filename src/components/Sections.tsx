@@ -1,5 +1,6 @@
 import { Button, Icon, useTheme } from "@material-ui/core";
-import { IconText, PropsItem } from "../data/Models";
+import { Link } from "react-router-dom";
+import { IconText, PropsItem, SectionItem } from "../data/Models";
 
 export const Sections = (props: PropsItem) => {
   const sections = props.dataRepo.getSections();
@@ -17,22 +18,26 @@ export const Sections = (props: PropsItem) => {
   return (
     <div className="row" style={sectionBarStyle}>
       {sections.map((section) => (
-        <SectionItem text={section.text} icon={section.icon} />
+        <SectionMenuItem {...section} />
       ))}
     </div>
   );
 };
 
-const SectionItem = (section: IconText) => {
-  const theme = useTheme()
+const SectionMenuItem = (section: SectionItem) => {
+  const theme = useTheme();
 
   const iconStyle = { color: theme.palette.text.primary, margin: "5px" };
-  const icon = <Icon className={section.icon.image} style={iconStyle} />;
+  const icon = (
+    <Icon className={section.iconText.icon.image} style={iconStyle} />
+  );
 
   const sectionButtonStyle = { margin: "20px" };
   return (
-    <Button style={sectionButtonStyle} startIcon={icon}>
-      {section.text}
-    </Button>
+    <Link to={section.route} style={{ textDecoration: "none" }}>
+      <Button style={sectionButtonStyle} startIcon={icon}>
+        {section.iconText.text}
+      </Button>
+    </Link>
   );
 };

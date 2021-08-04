@@ -1,5 +1,5 @@
 import { DataRepo } from "./DataRepo";
-import { Profile, Project, IconText, Education } from "./Models";
+import { Profile, Project, IconText, Education, SectionItem } from "./Models";
 import { data } from "./Data";
 
 export class DataRepoImpl implements DataRepo {
@@ -53,15 +53,18 @@ export class DataRepoImpl implements DataRepo {
     }));
   }
 
-  getSections(): IconText[] {
-    return data.sections.map((section) => ({
-      text: section.section,
-      icon: {
-        image: section.icon,
-        isExternal: false,
-        iconColor: section.color,
-      },
-    }));
+  getSections(): SectionItem[] {
+    return data.sections.map((section) => {
+      const iconText = {
+        text: section.section,
+        icon: {
+          image: section.icon,
+          isExternal: false,
+          iconColor: section.color,
+        },
+      };
+      return { iconText: iconText, route: section.route };
+    });
   }
 
   private isIconExternal(color?: string): Boolean {

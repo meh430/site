@@ -35,6 +35,11 @@ export interface IconText {
   icon: Icon;
 }
 
+export interface SectionItem {
+  iconText: IconText,
+  route: string
+}
+
 export interface Education extends ImageItem {
   schoolName: string;
   period: string;
