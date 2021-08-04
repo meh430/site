@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { PropsItem } from "../data/Models";
 
 export const Header = (props: PropsItem) => {
@@ -23,17 +22,22 @@ export const Header = (props: PropsItem) => {
     };
   }, [heading]);
 
+  const headerStyle = {
+    fontSize: "96px",
+    marginTop: "70px",
+    padding: "20px",
+    textAlign: "center",
+  } as React.CSSProperties;
+
+  const cursorStyle = {
+    visibility: cursor ? "visible" : "hidden",
+    fontWeight: "lighter",
+  } as React.CSSProperties;
+  
   return (
-    <h1 style={{ fontSize: "96px", marginTop: "50px", padding: "20px" }}>
+    <h1 style={headerStyle}>
       {message}
-      <span
-        style={{
-          visibility: cursor ? "visible" : "hidden",
-          fontWeight: "lighter",
-        }}
-      >
-        |
-      </span>
+      <span style={cursorStyle}>|</span>
     </h1>
   );
 };

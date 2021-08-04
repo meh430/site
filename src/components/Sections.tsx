@@ -1,22 +1,23 @@
 import { Button, Icon, useTheme } from "@material-ui/core";
 import { IconText, PropsItem } from "../data/Models";
 
+const disabledIcon = "#bababa";
+
 export const Sections = (props: PropsItem) => {
   const sections = props.dataRepo.getSections();
 
   const theme = useTheme();
 
+  const sectionBarStyle = {
+    minWidth: "100vw",
+    justifyContent: "center",
+    position: "sticky",
+    top: 0,
+    background: theme.palette.background.default,
+  } as React.CSSProperties;
+
   return (
-    <div
-      className="row"
-      style={{
-        width: "100vw",
-        justifyContent: "center",
-        position: "sticky",
-        top: 0,
-        background: theme.palette.background.default,
-      }}
-    >
+    <div className="row" style={sectionBarStyle}>
       {sections.map((section) => (
         <SectionItem text={section.text} icon={section.icon} />
       ))}
@@ -25,17 +26,12 @@ export const Sections = (props: PropsItem) => {
 };
 
 const SectionItem = (section: IconText) => {
-  console.log(section.icon.image);
+  const iconStyle = { color: section.icon.iconColor, margin: "5px" };
+  const icon = <Icon className={section.icon.image} style={iconStyle} />;
 
-  const icon = (
-    <Icon
-      className={section.icon.image}
-      style={{ color: section.icon.iconColor, margin: "5px" }}
-    />
-  );
-
+  const sectionButtonStyle = { margin: "20px" };
   return (
-    <Button style={{ margin: "20px" }} startIcon={icon}>
+    <Button style={sectionButtonStyle} startIcon={icon}>
       {section.text}
     </Button>
   );

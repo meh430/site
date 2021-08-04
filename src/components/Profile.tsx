@@ -4,46 +4,52 @@ import { ImageLink, Profile, PropsItem } from "../data/Models";
 export const getCardStyle = (theme: Theme, shadow: number = 11) => {
   return {
     boxShadow: theme.shadows[shadow],
-    borderRadius: "20px"
-  }
-}
+    borderRadius: "20px",
+  };
+};
 
-export const ProfileSection = (props: PropsItem) => {
-  return (
-    <div className="col" style={{alignItems: "center"}} >
-      <h1>About</h1>
-      <ProfileCard {...props}/>
-    </div>
-  )
-}
-
-const ProfileCard = (props: PropsItem) => {
-  const theme = useTheme()
+export const ProfileCard = (props: PropsItem) => {
+  const theme = useTheme();
 
   const profile = props.dataRepo.getProfile();
+
+  const profileCardStyle = {
+    margin: "20px",
+    maxWidth: "fit-content",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "10px",
+    ...getCardStyle(theme, 11),
+  };
+
+  const profileImageStyle = {
+    borderRadius: "20px",
+    margin: "10px",
+    width: "90%",
+    maxWidth: "250px",
+    maxHeight: "250px",
+  };
+
   return (
-    <Card
-      className="row"
-      style={{ margin: "20px", justifyContent: "center", ...getCardStyle(theme, 11) }}
-    >
-      <div
-        className="row"
-        style={{ justifyContent: "center", padding: "20px" }}
-      >
-        <img
-          src={profile.image}
-          style={{ borderRadius: "20px", margin: "20px", maxHeight: "300px" }}
-        />
-        <ProfileInfo {...profile} />
-      </div>
+    <Card className="row" style={profileCardStyle}>
+      <img src={profile.image} style={profileImageStyle} />
+      <ProfileInfo {...profile} />
     </Card>
   );
-};  
+};
 
 const ProfileInfo = (profile: Profile) => {
+  const profileInfoStyle = {
+    fontFamily: "Roboto",
+    margin: "10px",
+    width: "90%",
+    maxWidth: "500px",
+    fontSize: "16px",
+  };
+  
   return (
     <div className="col" style={{ justifyContent: "center" }}>
-      <p style={{ maxWidth: "500px", margin: "20px", fontSize: "18px" }}>{profile.bio}</p>
+      <p style={profileInfoStyle}>{profile.bio}</p>
       <div className="row" style={{ justifyContent: "center" }}>
         {profile.contactLinks.map((link) => (
           <SocialLink {...link} />

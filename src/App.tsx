@@ -4,9 +4,9 @@ import { Header } from "./components/Header";
 import { DataRepoImpl } from "./data/DataRepoImpl";
 import { DataRepo } from "./data/DataRepo";
 import { Sections } from "./components/Sections";
-import { ProfileSection } from "./components/Profile";
+import { ProfileCard } from "./components/Profile";
 import { createTheme, ThemeProvider, useMediaQuery } from "@material-ui/core";
-import { EducationCard } from "./components/Education";
+import { EducationSection } from "./components/Education";
 
 const App = () => {
   const dataRepo: DataRepo = new DataRepoImpl();
@@ -23,24 +23,23 @@ const App = () => {
     [prefersDarkMode]
   );
 
+  const appStyle = {
+    alignItems: "center",
+    minWidth: "100vw",
+    minHeight: "100vh",
+    background: theme.palette.background.default,
+  };
+
   return (
     <ThemeProvider theme={theme}>
-      <div
-        className="col"
-        style={{
-          alignItems: "center",
-          minWidth: "100vw",
-          minHeight: "100vh",
-          background: theme.palette.background.default,
-        }}
-      >
+      <div className="col" style={appStyle}>
         <Header dataRepo={dataRepo} />
         <Sections dataRepo={dataRepo} />
-        <ProfileSection dataRepo={dataRepo} />
-        <EducationCard />
+        <ProfileCard dataRepo={dataRepo} />
+        <EducationSection dataRepo={dataRepo} />
       </div>
     </ThemeProvider>
   );
-}
+};
 
 export default App;
