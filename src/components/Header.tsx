@@ -1,7 +1,10 @@
+import { useTheme } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import { PropsItem } from "../data/Models";
 
 export const Header = (props: PropsItem) => {
+  const theme = useTheme()
+
   const heading = props.dataRepo.getHeading();
 
   const [cursor, setCursor] = useState(false);
@@ -27,13 +30,14 @@ export const Header = (props: PropsItem) => {
     marginTop: "70px",
     padding: "20px",
     textAlign: "center",
+    color: theme.palette.text.primary
   } as React.CSSProperties;
 
   const cursorStyle = {
     visibility: cursor ? "visible" : "hidden",
     fontWeight: "lighter",
   } as React.CSSProperties;
-  
+
   return (
     <h1 style={headerStyle}>
       {message}

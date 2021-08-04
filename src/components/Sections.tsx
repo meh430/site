@@ -1,8 +1,6 @@
 import { Button, Icon, useTheme } from "@material-ui/core";
 import { IconText, PropsItem } from "../data/Models";
 
-const disabledIcon = "#bababa";
-
 export const Sections = (props: PropsItem) => {
   const sections = props.dataRepo.getSections();
 
@@ -26,7 +24,9 @@ export const Sections = (props: PropsItem) => {
 };
 
 const SectionItem = (section: IconText) => {
-  const iconStyle = { color: section.icon.iconColor, margin: "5px" };
+  const theme = useTheme()
+
+  const iconStyle = { color: theme.palette.text.primary, margin: "5px" };
   const icon = <Icon className={section.icon.image} style={iconStyle} />;
 
   const sectionButtonStyle = { margin: "20px" };
