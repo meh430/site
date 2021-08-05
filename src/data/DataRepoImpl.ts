@@ -68,6 +68,6 @@ export class DataRepoImpl implements DataRepo {
   }
 
   private isIconExternal(color?: string): Boolean {
-    return color ? true : false;
+    return color ? false : true;
   }
 }
