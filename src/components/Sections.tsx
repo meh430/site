@@ -1,13 +1,16 @@
 import { Button, Icon, useTheme } from "@material-ui/core";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { PropsItem, SectionItem } from "../data/Models";
 
 export const Sections = (props: PropsItem) => {
   const sections = props.dataRepo.getSections();
 
+  const location = useLocation();
   const theme = useTheme();
-  const [selectedSection, setSelectedSection] = useState(sections[0].route);
+  const [selectedSection, setSelectedSection] = useState(
+    location.pathname || sections[0].route
+  );
 
   const handleClick = (s: SectionItem) => {
     setSelectedSection(s.route);
