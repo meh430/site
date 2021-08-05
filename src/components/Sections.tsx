@@ -1,11 +1,17 @@
 import { Button, Icon, useTheme } from "@material-ui/core";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { IconText, PropsItem, SectionItem } from "../data/Models";
+import { PropsItem, SectionItem } from "../data/Models";
 
 export const Sections = (props: PropsItem) => {
   const sections = props.dataRepo.getSections();
 
   const theme = useTheme();
+  const [selectedSection, setSelectedSection] = useState(sections[0].route)
+
+  const handleClick = (s: SectionItem) => {
+    setSelectedSection(s.route)
+  };
 
   const sectionBarStyle = {
     minWidth: "100vw",
@@ -17,26 +23,36 @@ export const Sections = (props: PropsItem) => {
 
   return (
     <div className="row" style={sectionBarStyle}>
-      {sections.map((section) => (
-        <SectionMenuItem {...section} />
-      ))}
+      {sections.map((s) => {
+        const props = { section: s, selected: selectedSection === s.route, handleClick: handleClick };
+        return <SectionMenuItem {...props} />;
+      })}
     </div>
   );
 };
 
-const SectionMenuItem = (section: SectionItem) => {
+const SectionMenuItem = (props: {
+  section: SectionItem;
+  selected: boolean;
+  handleClick: (s: SectionItem) => void;
+}) => {
   const theme = useTheme();
 
-  const iconStyle = { color: theme.palette.text.primary, margin: "5px" };
+  const iconColor = props.selected ? theme.palette.text.primary : theme.palette.text.disabled
+  const iconStyle = { color: iconColor, margin: "5px" };
   const icon = (
-    <Icon className={section.iconText.icon.image} style={iconStyle} />
+    <Icon className={props.section.iconText.icon.image} style={iconStyle} />
   );
 
-  const sectionButtonStyle = { margin: "20px" };
+  const sectionButtonStyle = { margin: "20px", color: iconColor };
   return (
-    <Link to={section.route} style={{ textDecoration: "none" }}>
-      <Button style={sectionButtonStyle} startIcon={icon}>
-        {section.iconText.text}
+    <Link
+      to={props.section.route}
+      style={{ textDecoration: "none" }}
+      onClick={() => props.handleClick(props.section)}
+    >
+      <Button style={sectionButtonStyle} startIcon={icon} disableRipple>
+        {props.section.iconText.text}
       </Button>
     </Link>
   );
