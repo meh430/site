@@ -7,6 +7,9 @@ import { Sections } from "./components/Sections";
 import { ProfileCard } from "./components/Profile";
 import { createTheme, ThemeProvider, useMediaQuery } from "@material-ui/core";
 import { Switch, Route } from "react-router-dom";
+import { Projects } from "./components/Projects";
+import { Skills } from "./components/Skills";
+import { EducationSection } from "./components/Education";
 
 const App = () => {
   const dataRepo: DataRepo = new DataRepoImpl();
@@ -36,7 +39,16 @@ const App = () => {
         <Header dataRepo={dataRepo} />
         <Sections dataRepo={dataRepo} />
         <Switch>
-          <Route path="/">
+          <Route exact path="/">
+            <Projects dataRepo={dataRepo} />
+          </Route>
+          <Route exact path="/skills">
+            <Skills dataRepo={dataRepo} />
+          </Route>
+          <Route exact path="/education">
+            <EducationSection dataRepo={dataRepo} />
+          </Route>
+          <Route exact path="/about">
             <ProfileCard dataRepo={dataRepo} />
           </Route>
         </Switch>

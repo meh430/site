@@ -38,7 +38,7 @@ export const EducationSection = (props: PropsItem) => {
   return (
     <div className="row" style={{ justifyContent: "center" }}>
       {schools.map((school) => (
-        <EducationCard {...school} />
+        <EducationCard key={school.schoolName} {...school} />
       ))}
     </div>
   );

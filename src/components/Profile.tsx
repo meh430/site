@@ -46,13 +46,13 @@ const ProfileInfo = (profile: Profile) => {
     maxWidth: "500px",
     fontSize: "16px",
   };
-  
+
   return (
     <div className="col" style={{ justifyContent: "center" }}>
       <p style={profileInfoStyle}>{profile.bio}</p>
       <div className="row" style={{ justifyContent: "center" }}>
         {profile.contactLinks.map((link) => (
-          <SocialLink {...link} />
+          <SocialLink key={link.url} {...link} />
         ))}
       </div>
     </div>

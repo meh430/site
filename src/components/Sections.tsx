@@ -7,10 +7,10 @@ export const Sections = (props: PropsItem) => {
   const sections = props.dataRepo.getSections();
 
   const theme = useTheme();
-  const [selectedSection, setSelectedSection] = useState(sections[0].route)
+  const [selectedSection, setSelectedSection] = useState(sections[0].route);
 
   const handleClick = (s: SectionItem) => {
-    setSelectedSection(s.route)
+    setSelectedSection(s.route);
   };
 
   const sectionBarStyle = {
@@ -24,8 +24,12 @@ export const Sections = (props: PropsItem) => {
   return (
     <div className="row" style={sectionBarStyle}>
       {sections.map((s) => {
-        const props = { section: s, selected: selectedSection === s.route, handleClick: handleClick };
-        return <SectionMenuItem {...props} />;
+        const props = {
+          section: s,
+          selected: selectedSection === s.route,
+          handleClick: handleClick,
+        };
+        return <SectionMenuItem key={props.section.route} {...props} />;
       })}
     </div>
   );
@@ -38,7 +42,9 @@ const SectionMenuItem = (props: {
 }) => {
   const theme = useTheme();
 
-  const iconColor = props.selected ? theme.palette.text.primary : theme.palette.text.disabled
+  const iconColor = props.selected
+    ? theme.palette.text.primary
+    : theme.palette.text.disabled;
   const iconStyle = { color: iconColor, margin: "5px" };
   const icon = (
     <Icon className={props.section.iconText.icon.image} style={iconStyle} />
