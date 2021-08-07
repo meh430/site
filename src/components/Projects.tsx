@@ -7,10 +7,14 @@ export const Projects = (props: PropsItem) => {
   return (
     <div
       className="row"
-      style={{ justifyContent: "center", marginTop: "10px", marginBottom: "20px" }}
+      style={{
+        justifyContent: "center",
+        marginTop: "10px",
+        marginBottom: "20px",
+      }}
     >
       {projects.map((project) => (
-        <ProjectCard {...project} />
+        <ProjectCard {...project} key={project.projectName} />
       ))}
     </div>
   );
@@ -41,11 +45,21 @@ const ProjectCard = (project: Project) => {
     <Card className="col" style={cardStyle}>
       <h4 style={textStyle}>{project.projectName}</h4>
       <h5 style={textStyle}>{project.technologies}</h5>
-      <p style={textStyle}>{project.description}</p>
+      <p style={textStyle}>{getTruncatedText(project.description)}</p>
       <div className="row">
         <i className="fab fa-github" style={iconStyle} />
         <i className="fas fa-info-circle" style={iconStyle} />
       </div>
     </Card>
   );
+};
+
+const getTruncatedText = (text: string, limit: number = 150) => {
+  const ellipsis = "...";
+  const adjustedLimit = limit - 3;
+  if (text.length > adjustedLimit) {
+    return text.substring(0, adjustedLimit) + ellipsis;
+  } else {
+    return text;
+  }
 };

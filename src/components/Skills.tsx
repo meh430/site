@@ -1,4 +1,4 @@
-import { Card, Icon as Ic, useTheme } from "@material-ui/core";
+import { Card, useTheme } from "@material-ui/core";
 import { Icon, IconText, PropsItem } from "../data/Models";
 import { getCardStyle } from "./Profile";
 
