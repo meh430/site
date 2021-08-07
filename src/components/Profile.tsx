@@ -1,7 +1,5 @@
 import { Card, Theme, useTheme } from "@material-ui/core";
 import { ImageLink, Profile, PropsItem } from "../data/Models";
-import { QuoteRepoImpl } from "../data/QuoteRepoImpl";
-import { QuoteCard } from "./Quote";
 
 export const getCardStyle = (theme: Theme, shadow: number = 11) => {
   return {
@@ -14,7 +12,6 @@ export const ProfileSection = (props: PropsItem) => {
   return (
     <div className="col" style={{alignItems: "center", minWidth: "100vw"}}>
       <ProfileCard {...props}/>
-      <QuoteCard quoteRepo={new QuoteRepoImpl()}/>
     </div>
   )
 }
