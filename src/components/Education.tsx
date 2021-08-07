@@ -11,7 +11,7 @@ const EducationCard = (education: Education) => {
     <Card
       style={{
         maxWidth: "300px",
-        height: "350px",
+        height: "fit-content",
         margin: "20px",
         ...getCardStyle(theme),
       }}
