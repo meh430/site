@@ -47,7 +47,9 @@ const ProjectCard = (project: Project) => {
       <h5 style={textStyle}>{project.technologies}</h5>
       <p style={textStyle}>{getTruncatedText(project.description)}</p>
       <div className="row">
-        <i className="fab fa-github" style={iconStyle} />
+        <a href={project.projectLink} rel="noopener noreferrer" target="_blank">
+          <i className="fab fa-github" style={iconStyle} />
+        </a>
         <i className="fas fa-info-circle" style={iconStyle} />
       </div>
     </Card>
