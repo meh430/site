@@ -23,7 +23,7 @@ export const Projects = (props: PropsItem) => {
 const ProjectCard = (project: Project) => {
   const theme = useTheme();
   const cardStyle = {
-    ...getCardStyle(theme, 11),
+    ...getCardStyle(theme, 8),
     padding: "20px",
     margin: "10px",
     width: "90%",

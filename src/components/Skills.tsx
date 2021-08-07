@@ -25,7 +25,7 @@ export const Skills = (props: PropsItem) => {
 const SkillCard = (skill: IconText) => {
   const theme = useTheme();
   const cardStyle = {
-    ...getCardStyle(theme, 11),
+    ...getCardStyle(theme),
     justifyContent: "center",
     alignItems: "center",
     padding: "20px",

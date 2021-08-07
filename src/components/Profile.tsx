@@ -27,7 +27,7 @@ export const ProfileCard = (props: PropsItem) => {
     justifyContent: "center",
     alignItems: "center",
     padding: "10px",
-    ...getCardStyle(theme, 11),
+    ...getCardStyle(theme),
   };
 
   const profileImageStyle = {
