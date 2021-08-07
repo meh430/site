@@ -3,7 +3,10 @@ import { Fragment, useEffect } from "react";
 import { useState } from "react";
 import { QuoteRepo } from "../data/QuoteRepo";
 
-export const QuoteCard = (props: { quoteRepo: QuoteRepo, visible: boolean }) => { 
+export const QuoteCard = (props: {
+  quoteRepo: QuoteRepo;
+  visible: boolean;
+}) => {
   const theme = useTheme();
 
   const loading = "Loading...";
@@ -19,11 +22,11 @@ export const QuoteCard = (props: { quoteRepo: QuoteRepo, visible: boolean }) => 
 
   const quoteStyle = {
     padding: "20px",
-    width: "90%", 
+    width: "90%",
     maxWidth: "770px",
     marginBottom: "20px",
     alignItems: "center",
-    display: props.visible ? "block" : "none"
+    display: props.visible ? "block" : "none",
   } as React.CSSProperties;
   const textStyle = {
     margin: "0px",
@@ -31,10 +34,15 @@ export const QuoteCard = (props: { quoteRepo: QuoteRepo, visible: boolean }) => 
     fontFamily: "Roboto",
     color: theme.palette.text.primary,
   };
+  const qStyle = { margin: "6px" };
 
   const innerContent = (
     <Fragment>
-      <h3 style={textStyle}>{quote.quote}</h3>
+      <h3 style={textStyle}>
+        <i className="fas fa-quote-left" style={qStyle} />
+        {quote.quote}
+        <i className="fas fa-quote-right" style={qStyle} />
+      </h3>
       <h4
         style={{
           ...textStyle,
