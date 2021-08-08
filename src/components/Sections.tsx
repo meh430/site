@@ -1,3 +1,4 @@
+import { useMediaQuery } from "@material-ui/core";
 import { Button, Icon, useTheme } from "@material-ui/core";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -45,24 +46,33 @@ const SectionMenuItem = (props: {
 }) => {
   const theme = useTheme();
 
+  const isMobile = useMediaQuery("(max-width: 420px)");
+
   const iconColor = props.selected
     ? theme.palette.text.primary
     : theme.palette.text.disabled;
-  const iconStyle = { color: iconColor, margin: "5px" };
+  const iconStyle = { color: iconColor, margin: isMobile ? "20px" : "5px" };
   const icon = (
     <Icon className={props.section.iconText.icon.image} style={iconStyle} />
   );
 
-  const sectionButtonStyle = { margin: "20px", color: iconColor };
+  const sectionButtonStyle = {
+    margin: "20px",
+    color: iconColor,
+  };
   return (
     <Link
       to={props.section.route}
       style={{ textDecoration: "none" }}
       onClick={() => props.handleClick(props.section)}
     >
-      <Button style={sectionButtonStyle} startIcon={icon} disableRipple>
-        {props.section.iconText.text}
-      </Button>
+      {isMobile ? (
+        icon
+      ) : (
+        <Button style={sectionButtonStyle} startIcon={icon} disableRipple>
+          {props.section.iconText.text}
+        </Button>
+      )}
     </Link>
   );
 };

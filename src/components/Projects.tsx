@@ -1,4 +1,4 @@
-import { Card, useTheme } from "@material-ui/core";
+import { Card, Dialog, useTheme } from "@material-ui/core";
 import { Project, PropsItem } from "../data/Models";
 import { getCardStyle } from "./Profile";
 
@@ -43,6 +43,7 @@ const ProjectCard = (project: Project) => {
   };
   return (
     <Card className="col" style={cardStyle}>
+      <ProjectModal {...project} />
       <h4 style={textStyle}>{project.projectName}</h4>
       <h5 style={textStyle}>{project.technologies}</h5>
       <p style={textStyle}>{getTruncatedText(project.description)}</p>
@@ -53,6 +54,41 @@ const ProjectCard = (project: Project) => {
         <i className="fas fa-info-circle" style={iconStyle} />
       </div>
     </Card>
+  );
+};
+
+const ProjectModal = (project: Project) => {
+  const theme = useTheme();
+
+  const wrapperStyle = {
+    backgroundColor: theme.palette.background.default,
+    alignItems: "center",
+    overscrollBehaviorY: "none",
+  } as React.CSSProperties;
+  const topBarStyle = {
+    justifyContent: "space-between",
+    width: "100%",
+    alignItems: "center",
+    maxWidth: "100%",
+    position: "sticky",
+    top: "0",
+    "z-index": "1",
+    backgroundColor: theme.palette.background.default,
+  } as React.CSSProperties;
+  const backStyle = {
+    fontSize: "26px",
+    marginLeft: "10px",
+    cursor: "pointer",
+    color: theme.palette.text.primary,
+  };
+  return (
+    <Dialog open={project.projectName === "Reddit Walls" && false}>
+      <div className="col" style={wrapperStyle}>
+        <div className="row" style={topBarStyle}>
+          <i className="fas fa-arrow-left" style={backStyle} />
+        </div>
+      </div>
+    </Dialog>
   );
 };
 

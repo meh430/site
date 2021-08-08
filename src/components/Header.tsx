@@ -1,3 +1,4 @@
+import { useMediaQuery } from "@material-ui/core";
 import { useTheme } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import { PropsItem } from "../data/Models";
@@ -28,8 +29,10 @@ export const Header = (props: PropsItem) => {
     };
   }, [heading]);
 
+  const isMobile = useMediaQuery("(max-width: 420px)");
+
   const headerStyle = {
-    fontSize: "96px",
+    fontSize: isMobile ? "28px" : "96px",
     marginTop: "70px",
     marginBottom: "40px",
     padding: "20px",
