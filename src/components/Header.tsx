@@ -46,12 +46,12 @@ export const Header = (props: PropsItem) => {
   } as React.CSSProperties;
 
   return (
-    <div className="col" style={{alignItems: "center"}}>
-      <h1 style={headerStyle} onClick={() => setShowQuote(show => !show)}>
+    <div className="col" style={{ alignItems: "center" }}>
+      <h1 style={headerStyle} onClick={() => setShowQuote((show) => !show)}>
         {message}
         <span style={cursorStyle}>|</span>
       </h1>
-      <QuoteCard quoteRepo={new QuoteRepoImpl()} visible={showQuote}/>
+      <QuoteCard quoteRepo={new QuoteRepoImpl()} visible={showQuote} />
     </div>
   );
 };

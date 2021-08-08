@@ -42,7 +42,7 @@ const SkillCard = (skill: IconText) => {
 
 const SkillIcon = (icon: Icon) => {
   if (icon.isExternal) {
-    return <img src={icon.image} alt="skill icon"  height="36px" width="36px" />;
+    return <img src={icon.image} alt="skill icon" height="36px" width="36px" />;
   } else {
     const iconStyle = {
       fontSize: "40px",

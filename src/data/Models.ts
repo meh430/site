@@ -36,8 +36,8 @@ export interface IconText {
 }
 
 export interface SectionItem {
-  iconText: IconText,
-  route: string
+  iconText: IconText;
+  route: string;
 }
 
 export interface Education extends ImageItem {
