@@ -1,7 +1,7 @@
 {
   "name": "personal-site",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "homepage": "http://meh430.github.io/site",
   "dependencies": {
     "@material-ui/core": "^4.12.3",
