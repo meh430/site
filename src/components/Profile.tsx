@@ -11,11 +11,11 @@ export const getCardStyle = (theme: Theme, shadow: number = 11) => {
 
 export const ProfileSection = (props: PropsItem) => {
   return (
-    <div className="col" style={{alignItems: "center", minWidth: "100vw"}}>
-      <ProfileCard {...props}/>
+    <div className="col" style={{ alignItems: "center", minWidth: "100vw" }}>
+      <ProfileCard {...props} />
     </div>
-  )
-}
+  );
+};
 
 export const ProfileCard = (props: PropsItem) => {
   const theme = useTheme();
@@ -41,7 +41,7 @@ export const ProfileCard = (props: PropsItem) => {
 
   return (
     <Card className="row" style={profileCardStyle}>
-      <LoadingImage image={profile.image} imageStyle={profileImageStyle}/>
+      <LoadingImage image={profile.image} imageStyle={profileImageStyle} />
       <ProfileInfo {...profile} />
     </Card>
   );
@@ -51,15 +51,21 @@ const ProfileInfo = (profile: Profile) => {
   const profileInfoStyle = {
     fontFamily: "Roboto",
     margin: "10px",
-    width: "90%",
+    width: "95%",
     maxWidth: "500px",
     fontSize: "16px",
   };
 
   return (
-    <div className="col" style={{ justifyContent: "center" }}>
+    <div
+      className="col"
+      style={{ justifyContent: "center", alignItems: "center" }}
+    >
       <p style={profileInfoStyle}>{profile.bio}</p>
-      <div className="row" style={{ justifyContent: "center" }}>
+      <div
+        className="row"
+        style={{ justifyContent: "center", width: "fit-content" }}
+      >
         {profile.contactLinks.map((link) => (
           <SocialLink key={link.url} {...link} />
         ))}
@@ -69,10 +75,14 @@ const ProfileInfo = (profile: Profile) => {
 };
 
 const SocialLink = (imageLink: ImageLink) => {
+  const theme = useTheme();
+  const isGh = imageLink.icon.image.includes("git");
   return (
     <a
       className="social"
-      style={{ color: imageLink.icon.iconColor }}
+      style={{
+        color: isGh ? theme.palette.text.primary : imageLink.icon.iconColor,
+      }}
       href={imageLink.url}
       rel="noopener noreferrer"
       target="_blank"

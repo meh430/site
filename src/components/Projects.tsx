@@ -110,6 +110,15 @@ const ProjectModal = (props: ProjectModalProps) => {
     margin: "0px",
     padding: "0px",
   };
+  const chipStyle = {
+    margin: "8px"
+  }
+  const chipWrapperStyle = {
+    marginBottom: "10px",
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center"
+  }
   return (
     <Dialog
       open={props.isOpen}
@@ -122,10 +131,14 @@ const ProjectModal = (props: ProjectModalProps) => {
       TransitionComponent={Transition}
     >
       <div className="col" style={wrapperStyle}>
-        <h2 style={{ ...textStyle, marginTop: "20px" }}>
+        <h2 style={{ ...textStyle, marginTop: "20px", textAlign: "center" }}>
           {project.projectName}
         </h2>
         <ImageCarousel {...project} />
+        <p style={{...textStyle, margin: "20px", textAlign: "center"}}>{project.description}</p>
+        <div className="row" style={chipWrapperStyle}>
+        {project.features.map(ft => <Chip key={ft} label={ft} style={chipStyle} color="primary"/>)}
+        </div>
       </div>
     </Dialog>
   );
