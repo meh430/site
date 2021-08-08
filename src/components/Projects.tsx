@@ -1,7 +1,14 @@
-import { Card, CircularProgress, Dialog, useTheme } from "@material-ui/core";
+import {
+  Card,
+  CircularProgress,
+  Dialog,
+  useTheme,
+  Zoom,
+} from "@material-ui/core";
 import React, { Fragment, useState } from "react";
 import { Project, PropsItem } from "../data/Models";
 import { getCardStyle } from "./Profile";
+import { TransitionProps } from "@material-ui/core/transitions/transition";
 
 interface ProjectModalProps {
   project: Project;
@@ -80,6 +87,13 @@ const ProjectCard = (project: Project) => {
   );
 };
 
+const Transition = React.forwardRef(function Transition(
+  props: TransitionProps & { children?: React.ReactElement<any, any> },
+  ref: React.Ref<unknown>
+) {
+  return <Zoom ref={ref} {...props} />;
+});
+
 const ProjectModal = (props: ProjectModalProps) => {
   const theme = useTheme();
   const project: Project = props.project;
@@ -102,6 +116,7 @@ const ProjectModal = (props: ProjectModalProps) => {
       PaperProps={{
         style: { borderRadius: 20 },
       }}
+      TransitionComponent={Transition}
     >
       <div className="col" style={wrapperStyle}>
         <h2 style={{ ...textStyle, marginTop: "20px" }}>
