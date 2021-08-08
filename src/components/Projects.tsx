@@ -1,6 +1,13 @@
 import { Card, Dialog, useTheme } from "@material-ui/core";
+import { useState } from "react";
 import { Project, PropsItem } from "../data/Models";
 import { getCardStyle } from "./Profile";
+
+interface ProjectModalProps {
+  project: Project;
+  isOpen: boolean;
+  handleClose: () => void;
+}
 
 export const Projects = (props: PropsItem) => {
   const projects = props.dataRepo.getProjects();
@@ -22,6 +29,11 @@ export const Projects = (props: PropsItem) => {
 
 const ProjectCard = (project: Project) => {
   const theme = useTheme();
+
+  const [open, setOpen] = useState(false);
+  const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
+
   const cardStyle = {
     ...getCardStyle(theme, 8),
     padding: "20px",
@@ -40,10 +52,17 @@ const ProjectCard = (project: Project) => {
     margin: "10px",
     fontSize: "40px",
     color: theme.palette.text.primary,
+    cursor: "pointer",
+  };
+
+  const modalProps: ProjectModalProps = {
+    project: project,
+    isOpen: open,
+    handleClose: handleClose,
   };
   return (
     <Card className="col" style={cardStyle}>
-      <ProjectModal {...project} />
+      <ProjectModal {...modalProps} />
       <h4 style={textStyle}>{project.projectName}</h4>
       <h5 style={textStyle}>{project.technologies}</h5>
       <p style={textStyle}>{getTruncatedText(project.description)}</p>
@@ -51,44 +70,64 @@ const ProjectCard = (project: Project) => {
         <a href={project.projectLink} rel="noopener noreferrer" target="_blank">
           <i className="fab fa-github" style={iconStyle} />
         </a>
-        <i className="fas fa-info-circle" style={iconStyle} />
+        <i
+          className="fas fa-info-circle"
+          style={iconStyle}
+          onClick={handleOpen}
+        />
       </div>
     </Card>
   );
 };
 
-const ProjectModal = (project: Project) => {
+const ProjectModal = (props: ProjectModalProps) => {
   const theme = useTheme();
+  const project: Project = props.project;
 
   const wrapperStyle = {
     backgroundColor: theme.palette.background.default,
     alignItems: "center",
     overscrollBehaviorY: "none",
   } as React.CSSProperties;
-  const topBarStyle = {
-    justifyContent: "space-between",
-    width: "100%",
-    alignItems: "center",
-    maxWidth: "100%",
-    position: "sticky",
-    top: "0",
-    "z-index": "1",
-    backgroundColor: theme.palette.background.default,
-  } as React.CSSProperties;
-  const backStyle = {
-    fontSize: "26px",
-    marginLeft: "10px",
-    cursor: "pointer",
-    color: theme.palette.text.primary,
+  const textStyle = {
+    margin: "0px",
+    padding: "0px",
   };
   return (
-    <Dialog open={project.projectName === "Reddit Walls" && false}>
+    <Dialog
+      open={props.isOpen}
+      onClose={props.handleClose}
+      fullWidth
+      maxWidth="sm"
+      PaperProps={{
+        style: { borderRadius: 20 },
+      }}
+    >
       <div className="col" style={wrapperStyle}>
-        <div className="row" style={topBarStyle}>
-          <i className="fas fa-arrow-left" style={backStyle} />
-        </div>
+        <h2 style={{ ...textStyle, marginTop: "20px" }}>
+          {project.projectName}
+        </h2>
+        <ImageCarousel {...project} />
       </div>
     </Dialog>
+  );
+};
+
+const ImageCarousel = (project: Project) => {
+  const wrapperStyle = {
+    alignItems: "center",
+    margin: "20px",
+  };
+  const imageStyle = {
+    width: "95%",
+    borderRadius: "20px",
+  };
+  const bottomControlStyle = {};
+  return (
+    <div className="col" style={wrapperStyle}>
+      <img src={project.images[0]} style={imageStyle} />
+      <div className="row" style={bottomControlStyle}></div>
+    </div>
   );
 };
 
