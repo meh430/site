@@ -1,5 +1,6 @@
 import { Card, Theme, useTheme } from "@material-ui/core";
 import { ImageLink, Profile, PropsItem } from "../data/Models";
+import { LoadingImage } from "./Projects";
 
 export const getCardStyle = (theme: Theme, shadow: number = 11) => {
   return {
@@ -40,7 +41,7 @@ export const ProfileCard = (props: PropsItem) => {
 
   return (
     <Card className="row" style={profileCardStyle}>
-      <img src={profile.image} style={profileImageStyle} />
+      <LoadingImage image={profile.image} imageStyle={profileImageStyle}/>
       <ProfileInfo {...profile} />
     </Card>
   );

@@ -1,6 +1,7 @@
 import { Card, useTheme } from "@material-ui/core";
 import { Education, PropsItem } from "../data/Models";
 import { getCardStyle } from "./Profile";
+import { LoadingImage } from "./Projects";
 
 const EducationCard = (education: Education) => {
   const theme = useTheme();
@@ -21,9 +22,9 @@ const EducationCard = (education: Education) => {
         style={{ padding: "20px", alignItems: "center", textAlign: "center" }}
       >
         <h2 style={margins}>{education.schoolName}</h2>
-        <img
-          src={education.image}
-          style={{ margin: "20px", width: "100px", height: "100px" }}
+        <LoadingImage
+          image={education.image}
+          imageStyle={{ margin: "20px", width: "100px", height: "100px" }}
         />
         <h4 style={margins}>{education.period}</h4>
         <h4 style={margins}>{education.details}</h4>
