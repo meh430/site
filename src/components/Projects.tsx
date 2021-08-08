@@ -1,5 +1,5 @@
-import { Card, Dialog, useTheme } from "@material-ui/core";
-import { useState } from "react";
+import { Card, CircularProgress, Dialog, useTheme } from "@material-ui/core";
+import React, { Fragment, useState } from "react";
 import { Project, PropsItem } from "../data/Models";
 import { getCardStyle } from "./Profile";
 
@@ -125,9 +125,34 @@ const ImageCarousel = (project: Project) => {
   const bottomControlStyle = {};
   return (
     <div className="col" style={wrapperStyle}>
-      <img src={project.images[0]} style={imageStyle} />
+      <LoadingImage image={project.images[0]} imageStyle={imageStyle} />
       <div className="row" style={bottomControlStyle}></div>
     </div>
+  );
+};
+
+export const LoadingImage = (props: {
+  image: string;
+  imageStyle: React.CSSProperties;
+}) => {
+  const [loading, setLoading] = useState(true);
+
+  const getDisplay = (hide: boolean) => (hide ? "none" : "block");
+
+  const imageStyle = {
+    ...props.imageStyle,
+    display: getDisplay(loading),
+  };
+
+  return (
+    <Fragment>
+      <img
+        onLoad={() => setLoading(false)}
+        src={props.image}
+        style={imageStyle}
+      />
+      <CircularProgress style={{ display: getDisplay(!loading) }} />
+    </Fragment>
   );
 };
 
