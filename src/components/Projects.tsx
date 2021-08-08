@@ -10,6 +10,8 @@ import React, { Fragment, useState } from "react";
 import { Project, PropsItem } from "../data/Models";
 import { getCardStyle } from "./Profile";
 import { TransitionProps } from "@material-ui/core/transitions/transition";
+import { useRef } from "react";
+import { useEffect } from "react";
 
 interface ProjectModalProps {
   project: Project;
@@ -166,7 +168,6 @@ const ImageCarousel = (project: Project) => {
     margin: "10px",
     justifyContent: "center",
     alignItems: "center",
-    display: project.images.length === 1 ? "none" : "block",
   };
   const iconStyle = {
     fontSize: "36px",
@@ -178,7 +179,14 @@ const ImageCarousel = (project: Project) => {
   return (
     <div className="col" style={wrapperStyle}>
       <LoadingImage image={project.images[index]} imageStyle={imageStyle} />
-      <div className="row" style={bottomControlStyle}>
+      <div
+        className="row"
+        style={
+          project.images.length === 1
+            ? { ...bottomControlStyle, display: "none" }
+            : bottomControlStyle
+        }
+      >
         <i
           className="fas fa-chevron-circle-left"
           style={iconStyle}
@@ -198,11 +206,26 @@ const ImageCarousel = (project: Project) => {
   );
 };
 
+const usePrevious = <T extends unknown>(value: T): T | undefined => {
+  const ref = useRef<T>();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+};
+
 export const LoadingImage = (props: {
   image: string;
   imageStyle: React.CSSProperties;
 }) => {
   const [loading, setLoading] = useState(true);
+  const prevProps = usePrevious(props);
+
+  useEffect(() => {
+    if (prevProps?.image !== props.image) {
+      setLoading(true);
+    }
+  }, [setLoading, prevProps?.image, props.image]);
 
   const getDisplay = (hide: boolean) => (hide ? "none" : "block");
 
@@ -214,8 +237,11 @@ export const LoadingImage = (props: {
   return (
     <Fragment>
       <img
-        onLoad={() => setLoading(false)}
+        onLoad={() => {
+          setLoading(false);
+        }}
         src={props.image}
+        alt="loading"
         style={imageStyle}
       />
       <CircularProgress style={{ display: getDisplay(!loading) }} />
