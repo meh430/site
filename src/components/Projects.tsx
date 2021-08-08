@@ -1,5 +1,6 @@
 import {
   Card,
+  Chip,
   CircularProgress,
   Dialog,
   useTheme,
@@ -129,6 +130,30 @@ const ProjectModal = (props: ProjectModalProps) => {
 };
 
 const ImageCarousel = (project: Project) => {
+  const theme = useTheme();
+
+  const [index, setIndex] = useState(0);
+
+  const changeImage = (next: boolean): void => {
+    if (next && index === project.images.length - 1) {
+      return setIndex(0);
+    }
+
+    if (next) {
+      return setIndex((idx) => idx + 1);
+    }
+
+    if (index === 0) {
+      return setIndex(project.images.length - 1);
+    }
+
+    return setIndex((idx) => idx - 1);
+  };
+
+  if (project.images.length === 0) {
+    return <i style={{ display: "none" }} />;
+  }
+
   const wrapperStyle = {
     alignItems: "center",
     margin: "20px",
@@ -137,11 +162,38 @@ const ImageCarousel = (project: Project) => {
     width: "95%",
     borderRadius: "20px",
   };
-  const bottomControlStyle = {};
+  const bottomControlStyle = {
+    margin: "10px",
+    justifyContent: "center",
+    alignItems: "center",
+    display: project.images.length === 1 ? "none" : "block",
+  };
+  const iconStyle = {
+    fontSize: "36px",
+    color: theme.palette.text.primary,
+    cursor: "pointer",
+    margin: "10px",
+  };
+
   return (
     <div className="col" style={wrapperStyle}>
-      <LoadingImage image={project.images[0]} imageStyle={imageStyle} />
-      <div className="row" style={bottomControlStyle}></div>
+      <LoadingImage image={project.images[index]} imageStyle={imageStyle} />
+      <div className="row" style={bottomControlStyle}>
+        <i
+          className="fas fa-chevron-circle-left"
+          style={iconStyle}
+          onClick={() => changeImage(false)}
+        />
+        <Chip
+          label={`${index + 1} / ${project.images.length}`}
+          style={{ fontSize: "20px" }}
+        />
+        <i
+          className="fas fa-chevron-circle-right"
+          style={iconStyle}
+          onClick={() => changeImage(true)}
+        />
+      </div>
     </div>
   );
 };
